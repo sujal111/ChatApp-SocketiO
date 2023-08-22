@@ -10,13 +10,12 @@ io.on('connection',(socket)=>{
     console.log(`a user connected`)
 
 
-    socket.on('from_client',(socket)=>{
-        console.log("event coming from clients")
+    socket.on('msg_send',(data)=>{
+        console.log(data)
+        io.emit('msg_rcvd',data)
     })
 
-    setInterval(()=>{
-        socket.emit('from_server')
-    },2000)
+   
 });
 
 app.use('/',express.static(__dirname+'/public'));
